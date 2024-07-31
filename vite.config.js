@@ -5,13 +5,21 @@ import svgr from 'vite-plugin-svgr';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://live.devnimble.com',
+        changeOrigin: true,
+      },
+    },
+  },
   resolve: {
     alias: {
-      src: "/src",
-      components: "/components",
-      pages: "/src/pages",
-      assets: "/src/assets"
-    }
+      src: '/src',
+      components: '/components',
+      pages: '/src/pages',
+      assets: '/src/assets',
+    },
   },
   base: '/contacts-book',
 });

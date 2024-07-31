@@ -1,36 +1,36 @@
+export default function ContactItem({ data }) {
+  const { avatar_url, tags, fields } = data;
 
-export default function ContactItem({}) {
+  const firstName = fields['first name'][0].value;
+  const lastName = fields["last name"]?.[0].value;
+  const email = fields.email[0].value;
+
+
   return (
     <>
-      <li className="relative bg-slate-100 rounded p-3.5 flex gap-3">
+      <li className="relative bg-gray-100 rounded p-3.5 flex gap-3 mb-5">
         <img
           className="w-14 h-14 rounded-full"
-          src="https://live.devnimble.com/api/avatars/person_default"
+          src={avatar_url}
           alt="Contact photo"
         />
         <div>
           <div className="flex gap-2 mb-2">
             <h2 className="capitalize font-medium text-base text-black ">
-              First Name
+              {firstName}
             </h2>
             <h2 className="capitalize font-medium text-base text-black ">
-              Last Name
+              {lastName}
             </h2>
           </div>
-          <p className="font-medium text-base text-black mb-2">Email</p>
+          <p className="font-medium text-base text-black mb-2">{email}</p>
           <ul className="flex flex-wrap gap-2">
-            <li className="bg-slate-300 rounded font-medium text-sm text-center p-1">
-              tags
-            </li>
-            <li className="bg-slate-300 rounded font-medium text-sm text-center p-1">
-              tags
-            </li>
-            <li className="bg-slate-300 rounded font-medium text-sm text-center p-1">
-              tags
-            </li>
-            <li className="bg-slate-300 rounded font-medium text-sm text-center p-1">
-              tags
-            </li>
+            {tags &&
+              tags.map((item) => (
+                <li key={item.id} className="bg-slate-300 rounded font-medium text-sm text-center flex flex-wrap p-2">
+                  {item.tag}
+                </li>
+              ))}
           </ul>
         </div>
 

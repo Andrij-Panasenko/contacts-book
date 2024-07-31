@@ -14,7 +14,8 @@ const handleSubmit = (values) => {
 
 export default function ContactForm({}) {
   return (
-    <>
+    <div className='w-full md:max-w-sm'>
+      <h2 className='font-medium text-xl'>Create contact</h2>
       <Formik initialValues={initialValue} onSubmit={handleSubmit}>
         <Form className="flex flex-col gap-10">
           <InputField required label="First name" name="firstName" />
@@ -23,6 +24,6 @@ export default function ContactForm({}) {
           <Button type="submit">Add contact</Button>
         </Form>
       </Formik>
-    </>
+    </div>
   );
 }

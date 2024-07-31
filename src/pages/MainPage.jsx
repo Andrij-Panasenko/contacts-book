@@ -9,13 +9,17 @@ export default function MainPage() {
   return (
     <>
       <div className="container mx-auto p-9">
-        <div className="flex gap-10 justify-center">
+        <div className="flex flex-col items-center gap-5 md:flex-row md:items-start">
           <ContactForm />
-          <ul>
-            {resources && resources.map((item) => (
-              <ContactItem key={item.id} data={item} />
-            ))}
-          </ul>
+          <div className='w-full'>
+            <h2 className="font-medium text-xl mb-2">Contacts</h2>
+            <ul className="flex flex-col gap-5">
+              {resources &&
+                resources.map((item) => (
+                  <ContactItem key={item.id} data={item} />
+                ))}
+            </ul>
+          </div>
         </div>
       </div>
     </>

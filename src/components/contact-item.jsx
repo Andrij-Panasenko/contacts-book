@@ -8,7 +8,7 @@ export default function ContactItem({ data }) {
 
   return (
     <>
-      <li className="relative bg-gray-100 rounded p-3.5 flex gap-3 mb-5">
+      <li className="relative bg-gray-100 rounded p-3.5 flex gap-3">
         <img
           className="w-14 h-14 rounded-full"
           src={avatar_url}

@@ -1,10 +1,13 @@
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../redux/operations';
+
 export default function ContactItem({ data }) {
-  const { avatar_url, tags, fields } = data;
+  const dispatch = useDispatch();
+  const { avatar_url, tags, fields, id } = data;
 
   const firstName = fields['first name'][0].value;
-  const lastName = fields["last name"]?.[0].value;
+  const lastName = fields['last name']?.[0].value;
   const email = fields.email?.[0].value;
-
 
   return (
     <>
@@ -27,14 +30,20 @@ export default function ContactItem({ data }) {
           <ul className="flex flex-wrap gap-2">
             {tags &&
               tags.map((item) => (
-                <li key={item.id} className="bg-slate-300 rounded font-medium text-sm text-center flex flex-wrap p-2">
+                <li
+                  key={item.id}
+                  className="bg-slate-300 rounded font-medium text-sm text-center flex flex-wrap p-2"
+                >
                   {item.tag}
                 </li>
               ))}
           </ul>
         </div>
 
-        <button className="absolute top-3.5 right-3.5 w-6 h-6">
+        <button
+          onClick={() => dispatch(deleteContact(id))}
+          className="absolute top-3.5 right-3.5 w-6 h-6"
+        >
           <span class="material-symbols-outlined">cancel</span>
         </button>
       </li>

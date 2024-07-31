@@ -3,7 +3,7 @@ export default function ContactItem({ data }) {
 
   const firstName = fields['first name'][0].value;
   const lastName = fields["last name"]?.[0].value;
-  const email = fields.email[0].value;
+  const email = fields.email?.[0].value;
 
 
   return (

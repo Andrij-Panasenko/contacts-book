@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { lazy, useEffect } from 'react';
 import { fetchContacts } from './redux/operations';
 import { useDispatch } from 'react-redux';
@@ -17,6 +18,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
       </Routes>
+      <Toaster />
     </>
   );
 }

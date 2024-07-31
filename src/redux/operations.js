@@ -12,7 +12,6 @@ export const fetchContacts = createAsyncThunk(
       });
 
       return response.data;
-      
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -23,14 +22,25 @@ export const createContact = createAsyncThunk(
   'contact/create',
   async (newContact, thunkAPI) => {
     try {
-      const response = await axios.post('/api/v1/contact', newContact, {
-        headers: {
-          Authorization: 'Bearer VlP9cwH6cc7Kg2LsNPXpAvF6QNmgZn',
+      const response = await axios.post(
+        '/api/v1/contact',
+        {
+          record_type: 'person',
+          privacy: {
+            edit: null,
+            read: null,
+          },
+          owner_id: null,
+          fields: newContact,
         },
-      });
+        {
+          headers: {
+            Authorization: 'Bearer VlP9cwH6cc7Kg2LsNPXpAvF6QNmgZn',
+          },
+        }
+      );
 
       return response.data;
-
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

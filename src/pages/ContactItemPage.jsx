@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import InputField from '../components/input-field';
 import Button from '../components/button';
 import { Form, Formik } from 'formik';
@@ -35,7 +35,7 @@ export default function ContactItemPage() {
 
   return (
     <>
-      {contact &&
+      {contact?.length && !isLoading ? (
         contact.map((i) => (
           <div key={i.id} className="max-w-md mx-auto">
             <div className="flex gap-3 items-center mb-6">
@@ -96,7 +96,18 @@ export default function ContactItemPage() {
               </Form>
             </Formik>
           </div>
-        ))}
+        ))
+      ) : (
+        <div className="flex flex-col gap-3 items-center">
+          <h1 className="font-bold text-2xl">
+            Sorry. Seems like requested resource is not exist anymore
+          </h1>
+          <Link to="/" className="flex gap-2 items-center">
+            <span class="material-symbols-outlined">arrow_back</span> Return to
+            main page
+          </Link>
+        </div>
+      )}
     </>
   );
 }

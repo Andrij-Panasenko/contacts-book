@@ -1,10 +1,11 @@
-import { Toaster } from 'react-hot-toast';
 import { lazy, useEffect } from 'react';
 import { fetchContacts } from './redux/operations';
 import { useDispatch } from 'react-redux';
-import { Route, Router, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const MainPage = lazy(() => import('pages/MainPage.jsx'));
+const ContactItemPage = lazy(() => import('pages/ContactItemPage.jsx'));
+const AppLayout = lazy(() => import('./components/app-layout'));
 
 export default function App() {
   const dispatch = useDispatch();
@@ -16,9 +17,11 @@ export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<MainPage />} />
+          <Route path="/:id" element={<ContactItemPage />} />
+        </Route>
       </Routes>
-      <Toaster />
     </>
   );
 }

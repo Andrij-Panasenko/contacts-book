@@ -38,6 +38,7 @@ export default function ContactItemPage() {
     }
 
     dispatch(addTags({ id: param.id, newTags: tagsArray }));
+    toast.success('Tags added successfully. Please reload page')
   };
 
   return (

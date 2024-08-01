@@ -1,14 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import InputField from '../components/input-field';
 import Button from '../components/button';
 import { Form, Formik } from 'formik';
-import { currentContact } from '../redux/operations';
-import { selectCurrentContact } from '../redux/selectors';
+import { addTags, currentContact } from '../redux/operations';
+import { selectCurrentContact, selectIsLoading } from '../redux/selectors';
 
 export default function ContactItemPage() {
   const contact = useSelector(selectCurrentContact);
+  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
   const param = useParams();
 
@@ -23,7 +24,14 @@ export default function ContactItemPage() {
 
   useEffect(() => {
     dispatch(currentContact(param.id));
-  }, [param.id, dispatch]);
+  }, [param.id, dispatch, handleSubmit]);
+
+  function handleSubmit(values) {
+    const tagsArray = Object.values(values).flatMap((value) =>
+      value.split(' ')
+    );
+    dispatch(addTags({ id: param.id, newTags: tagsArray }));
+  }
 
   return (
     <>
@@ -71,11 +79,19 @@ export default function ContactItemPage() {
               </h2>
             )}
 
-            <Formik>
+            <Formik
+              initialValues={{ add_tag: '' }}
+              onSubmit={(values, actions) => {
+                handleSubmit(values);
+                actions.resetForm();
+              }}
+            >
               <Form>
                 <div className="space-y-6 flex flex-col">
                   <InputField name="add_tag" placeholder="Add new tag" />
-                  <Button>Add tag</Button>
+                  <Button disabled={isLoading} type="submit">
+                    Add tag
+                  </Button>
                 </div>
               </Form>
             </Formik>

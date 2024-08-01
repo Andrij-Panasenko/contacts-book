@@ -4,13 +4,14 @@ import {
   createContact,
   deleteContact,
   currentContact,
+  addTags,
 } from './operations';
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
     contactsItem: [],
-    currentContact:[],
+    currentContact: [],
     isLoading: false,
     error: null,
   },
@@ -65,6 +66,18 @@ const contactsSlice = createSlice({
       })
       .addCase(currentContact.rejected, (state, action) => {
         state.error = null;
+        state.error = action.payload;
+      })
+      .addCase(addTags.pending, (state, _) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(addTags.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(addTags.rejected, (state, action) => {
+        state.isLoading = false;
         state.error = action.payload;
       });
   },

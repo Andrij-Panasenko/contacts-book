@@ -12,6 +12,11 @@ export default function MainPage() {
         <ContactForm />
         <div className="w-full">
           <h2 className="font-medium text-xl mb-2">Contacts</h2>
+          {resources?.length === 0 && (
+            <h1 className="font-bold text-xl text-center">
+              Seems like your contact list is empty. Please add some contact.
+            </h1>
+          )}
           <ul className="flex flex-col gap-5">
             {resources &&
               resources.map((item) => (

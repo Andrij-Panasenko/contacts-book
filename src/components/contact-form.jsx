@@ -46,7 +46,7 @@ export default function ContactForm({}) {
         <Form className="flex flex-col gap-10">
           <InputField label="First name" name="firstName" />
           <InputField label="Last name" name="lastName" />
-          <InputField label="Email" name="email" type="email" />
+          <InputField required label="Email" name="email" type="email" />
           <Button type="submit">Add contact</Button>
         </Form>
       </Formik>

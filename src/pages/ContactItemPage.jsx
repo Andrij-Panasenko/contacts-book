@@ -35,9 +35,9 @@ export default function ContactItemPage() {
 
   return (
     <>
-      {contact?.length && !isLoading ? (
+      {contact?.length ? (
         contact.map((i) => (
-          <div key={i.id} className="max-w-md mx-auto">
+          <div key={i.id} className="max-w-xl mx-auto p-6 rounded bg-gray-100">
             <div className="flex gap-3 items-center mb-6">
               <img
                 src={i.avatar_url}

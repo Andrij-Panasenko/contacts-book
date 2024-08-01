@@ -6,6 +6,7 @@ import Button from '../components/button';
 import { Form, Formik } from 'formik';
 import { addTags, currentContact } from '../redux/operations';
 import { selectCurrentContact, selectIsLoading } from '../redux/selectors';
+import toast from 'react-hot-toast';
 
 export default function ContactItemPage() {
   const contact = useSelector(selectCurrentContact);
@@ -24,14 +25,20 @@ export default function ContactItemPage() {
 
   useEffect(() => {
     dispatch(currentContact(param.id));
-  }, [param.id, dispatch, handleSubmit]);
+  }, [param.id, dispatch]);
 
-  function handleSubmit(values) {
+  const handleSubmit = (values) => {
     const tagsArray = Object.values(values).flatMap((value) =>
-      value.split(' ')
+      value.split(' ').filter(Boolean)
     );
+
+    if (!tagsArray.length) {
+      toast.error("You can't add empty tags");
+      return;
+    }
+
     dispatch(addTags({ id: param.id, newTags: tagsArray }));
-  }
+  };
 
   return (
     <>

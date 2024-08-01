@@ -87,13 +87,10 @@ export const currentContact = createAsyncThunk(
 export const addTags = createAsyncThunk(
   'contacts/addTag',
   async ({ id, newTags }, thunkAPI) => {
-    console.log("🚀 ~ newTags:", newTags)
-    console.log("🚀 ~ id:", id)
     try {
       const response = await axios.put(
         `/api/v1/contacts/${id}/tags`,
         { tags: newTags },
-        // newTags,
         {
           headers: {
             Authorization: 'Bearer VlP9cwH6cc7Kg2LsNPXpAvF6QNmgZn',

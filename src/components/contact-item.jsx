@@ -1,10 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../redux/operations';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function ContactItem({ data }) {
   const dispatch = useDispatch();
-  const location = useLocation();
   const { avatar_url, tags, fields, id } = data;
 
   const firstName = fields['first name'][0].value;
@@ -13,8 +12,8 @@ export default function ContactItem({ data }) {
 
   return (
     <>
-      <Link to={`/${id}`} state={{ from: location }}>
-        <li className="relative bg-gray-100 rounded p-3.5 flex gap-3">
+      <li className="relative bg-gray-100 rounded p-3.5 flex gap-3">
+        <Link to={`/${id}`}>
           <img
             className="w-14 h-14 rounded-full"
             src={avatar_url}
@@ -42,15 +41,15 @@ export default function ContactItem({ data }) {
                 ))}
             </ul>
           </div>
+        </Link>
 
-          <button
-            onClick={() => dispatch(deleteContact(id))}
-            className="absolute top-3.5 right-3.5 w-6 h-6"
-          >
-            <span class="material-symbols-outlined">cancel</span>
-          </button>
-        </li>
-      </Link>
+        <button
+          onClick={() => dispatch(deleteContact(id))}
+          className="absolute top-3.5 right-3.5 w-6 h-6"
+        >
+          <span class="material-symbols-outlined">cancel</span>
+        </button>
+      </li>
     </>
   );
 }

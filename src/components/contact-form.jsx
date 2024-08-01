@@ -18,8 +18,8 @@ export default function ContactForm({}) {
     const { firstName, lastName, email } = values;
 
     const newContact = {
-      'first name': [{ label: 'first name', modifier: '', value: firstName }],
-      'last name': [{ label: 'last name', modifier: '', value: lastName }],
+      'first name': [{ label: 'first name', modifier: '', value: firstName || ' ' }],
+      'last name': [{ label: 'last name', modifier: '', value: lastName || ' ' }],
       email: [{ label: 'email', modifier: '', value: email }],
     };
 
